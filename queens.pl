@@ -1,13 +1,20 @@
-queen_all(N) :-
-	queen(N, Q),
-	write(Q), nl,
-	fail.
-queen_all(_).
-
 queens(X,Y,N):-
-    queen(N,Qs),
+    %queen(N,Qs),
+    
+    findall(Real,findnth(X,Y,N,Real),L),
+    length(L,Nn),
+    write("total output: "),write(Nn),nl,
+    aa(X,Y,N),
+    write("=========="),nl.
+
+
+
+aa(X,Y,N):-
     findnth(X,Y,N,Real),
-    print_a(0,N,Real),write("=====").
+    findall(Real,findnth(X,Y,N,Real),L),
+    length(L,Nn),
+    write("=========="),nl,
+    print_a(0,N,Real).
 
 print_a(X,N,[H|T]):-
     X<N,
@@ -16,7 +23,9 @@ print_a(X,N,[H|T]):-
     X1 is X+1,nl,
     %write("=========="),
     print_a(X1,N,T).
-    
+
+print_a(N,N,_).
+
 print(X,A,N):-
     A+1=:=X,  write("Q "), 
     %A=:=N-1->  write("========"),
